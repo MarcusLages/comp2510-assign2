@@ -1,0 +1,3 @@
+C:/Users/marcu/Documents/BCIT Files/COMP2510 - Procedural/COMP2510-assign2/cmake-build-debug/CMakeFiles/COMP2510_assign2.dir
+C:/Users/marcu/Documents/BCIT Files/COMP2510 - Procedural/COMP2510-assign2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/marcu/Documents/BCIT Files/COMP2510 - Procedural/COMP2510-assign2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
