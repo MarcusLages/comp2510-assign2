@@ -87,7 +87,14 @@ void merge(Student *students, int left, int mid, int right) {
 }
 
 int compare_students(const Student *a, const Student *b) {
-    // TODO: check for year-month-day order first
+    if(a->info.domestic.year_birth != b->info.domestic.year_birth)
+        return a->info.domestic.year_birth - b->info.domestic.year_birth;
+
+    if(a->info.domestic.month_birth != b->info.domestic.month_birth)
+        return a->info.domestic.month_birth - b->info.domestic.month_birth;
+
+    if(a->info.domestic.day_birth != b->info.domestic.day_birth)
+        return a->info.domestic.day_birth - b->info.domestic.day_birth;
 
     int cmp = strcmp(a->info.domestic.last_name, b->info.domestic.last_name);
     if(cmp != EQUAL) return cmp;

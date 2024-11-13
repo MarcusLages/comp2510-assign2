@@ -17,6 +17,9 @@
 struct DomesticStudent {
     char *first_name;
     char *last_name;
+    int year_birth;
+    int month_birth;
+    int day_birth;
     float gpa;
 };
 
@@ -26,6 +29,9 @@ struct DomesticStudent {
 struct InternationalStudent {
     char *first_name;
     char *last_name;
+    int year_birth;
+    int month_birth;
+    int day_birth;
     float gpa;
     int toefl;
 };
