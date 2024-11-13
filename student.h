@@ -1,10 +1,11 @@
 //
 // Created by marcu on 12/11/2024.
 //
-#include "student-io.h"
 
 #ifndef STUDENT_H
 #define STUDENT_H
+
+#include "student-io.h"
 
 #define INITIAL_CLASS_SIZE  30
 #define MAX_LINE_SIZE       256

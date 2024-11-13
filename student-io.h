@@ -6,7 +6,7 @@
 #define STUDENT_IO_H
 
 typedef enum Filter {
-    FILTER_DOMESTIC,
+    FILTER_DOMESTIC = 1,
     FILTER_INTERNATIONAL,
     FILTER_ALL
 } Filter;

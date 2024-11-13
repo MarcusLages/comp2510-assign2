@@ -26,11 +26,11 @@ Filter get_filter_option(const char *filter_arg) {
 
     // If there was any error, sets the filter_option as FILTER_ALL
     if(((*error != '\n') && (*error != '\0' || error == filter_arg)) ||
-        (filter_option < FILTER_DOMESTIC + 1 || filter_option > FILTER_ALL + 1 )) {
+        (filter_option < FILTER_DOMESTIC || filter_option > FILTER_ALL )) {
 
         perror("Invalid filter option. Using default filter as all students.\n");
-        return FILTER_ALL + 1;
+        return FILTER_ALL;
         }
 
-    return --filter_option;
+    return filter_option;
 }

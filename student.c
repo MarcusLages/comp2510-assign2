@@ -3,12 +3,9 @@
 //
 
 #include <stdio.h>
-#include "student.h"
-
 #include <stdlib.h>
 #include <string.h>
-
-#include "student-io.h"
+#include "student.h"
 
 void filter_students(char *input_file, char *output_file, const Filter option) {
     Student *students;
