@@ -7,16 +7,32 @@
 
 #include "student-io.h"
 
-#define INITIAL_CLASS_SIZE  30
+#define INITIAL_CLASS_SIZE  0
 #define MAX_LINE_SIZE       256
+#define MAX_NAME_SIZE       50
 #define EQUAL               0
+
+typedef enum Month {
+    JAN = 1,
+    FEB,
+    MAR,
+    APR,
+    MAY,
+    JUN,
+    JUL,
+    AUG,
+    SEP,
+    OCT,
+    NOV,
+    DEC
+} Month;
 
 /**
  * Structure that represents a Domestic student information.
  */
 struct DomesticStudent {
-    char *first_name;
-    char *last_name;
+    char first_name[MAX_NAME_SIZE];
+    char last_name[MAX_NAME_SIZE];
     int year_birth;
     int month_birth;
     int day_birth;
@@ -27,8 +43,8 @@ struct DomesticStudent {
  * Structure that represents an International student information.
  */
 struct InternationalStudent {
-    char *first_name;
-    char *last_name;
+    char first_name[MAX_NAME_SIZE];
+    char last_name[MAX_NAME_SIZE];
     int year_birth;
     int month_birth;
     int day_birth;
@@ -62,9 +78,8 @@ struct Student {
 
 typedef struct Student Student;
 
-
-
 int read_students(const char *input_file, Student *students);
+Student get_student_from_line(char *curr_line);
 void merge_sort(Student *students, int length);
 void merge_sort_recursion(Student *students, int left, int right);
 void merge(Student *students, int left, int mid, int right);

@@ -23,16 +23,43 @@ void filter_students(char *input_file, char *output_file, const Filter option) {
 int read_students(const char *input_file, Student *students) {
     FILE *file = open_input_file(input_file);
     int student_count = INITIAL_CLASS_SIZE;
-    char currLine[MAX_LINE_SIZE];
+    char curr_line[MAX_LINE_SIZE];
 
     // TODO: read students with realloc
-    while(fgets(currLine, MAX_LINE_SIZE, file)) {
-        // const Student currStudent = getStudentFromLine(currLine);
+    while(fgets(curr_line, MAX_LINE_SIZE, file)) {
+        resize_students_arr(students, student_count + 1);
+        students[student_count] = get_student_from_line(curr_line);
+        // const Student currStudent = get_student_from_line(currLine);
         // appendStudentTo(currStudent, ptrOut, option);
         student_count++;
     }
 
+    fclose(file);
     return student_count;
+}
+
+Student get_student_from_line(char *curr_line) {
+    Student student;
+
+    // TODO: eliminate magic number
+    char date[12];
+    char status;
+    const int scanned_data = sscanf(curr_line, "%s %s %s %f %c %d",
+                student.info.domestic.last_name,
+                student.info.domestic.first_name,
+                date,
+                &status,
+                &student.info.domestic.gpa,
+                &student.info.international.toefl);
+
+    // TODO: error handling for when scanned data is not right
+    // TODO: error handling for each stat
+
+    // TODO: get ymd
+    get_ymd(&student, date);
+    student.is_international = is_student_international();
+
+    return student;
 }
 
 void merge_sort(Student *students, int length) {
