@@ -11,6 +11,8 @@
 #define MAX_LINE_SIZE       256
 #define MAX_NAME_SIZE       50
 #define EQUAL               0
+#define MIN_STUDENTS_SIZE   1
+#define DATE_STRING_SIZE    12
 
 typedef enum Month {
     JAN = 1,
@@ -79,7 +81,10 @@ struct Student {
 typedef struct Student Student;
 
 int read_students(const char *input_file, Student *students);
+void resize_students_arr(Student **students, int new_size);
 Student get_student_from_line(char *curr_line);
+void get_ymd(Student *student, char date[DATE_STRING_SIZE]);
+int is_student_international(const Student student);
 void merge_sort(Student *students, int length);
 void merge_sort_recursion(Student *students, int left, int right);
 void merge(Student *students, int left, int mid, int right);

@@ -18,6 +18,9 @@ void filter_students(char *input_file, char *output_file, const Filter option) {
 
     merge_sort(students, student_count);
     // write_to_file(output_file, students, student_count, option);
+
+    free(students);
+    students = NULL;
 }
 
 int read_students(const char *input_file, Student *students) {
@@ -27,22 +30,33 @@ int read_students(const char *input_file, Student *students) {
 
     // TODO: read students with realloc
     while(fgets(curr_line, MAX_LINE_SIZE, file)) {
-        resize_students_arr(students, student_count + 1);
+        resize_students_arr(&students, student_count + 1);
         students[student_count] = get_student_from_line(curr_line);
-        // const Student currStudent = get_student_from_line(currLine);
-        // appendStudentTo(currStudent, ptrOut, option);
         student_count++;
     }
 
     fclose(file);
+
     return student_count;
+}
+
+void resize_students_arr(Student **students, int new_size) {
+    if(new_size < MIN_STUDENTS_SIZE) {
+        new_size = MIN_STUDENTS_SIZE;
+    }
+
+    *students = (Student *) realloc(students, new_size * sizeof(Student));
+
+    if(*students == NULL) {
+        perror("Could not allocate memory for student array.\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 Student get_student_from_line(char *curr_line) {
     Student student;
 
-    // TODO: eliminate magic number
-    char date[12];
+    char date[DATE_STRING_SIZE];
     char status;
     const int scanned_data = sscanf(curr_line, "%s %s %s %f %c %d",
                 student.info.domestic.last_name,
@@ -57,7 +71,7 @@ Student get_student_from_line(char *curr_line) {
 
     // TODO: get ymd
     get_ymd(&student, date);
-    student.is_international = is_student_international();
+    student.is_international = is_student_international(student);
 
     return student;
 }
