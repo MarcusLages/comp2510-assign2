@@ -8,7 +8,7 @@
 #include "student.h"
 
 void filter_students(char *input_file, char *output_file, const Filter option) {
-    Student *students;
+    Student **students;
     const int student_count = read_students(input_file, students);
 
     if(student_count == 0) {
@@ -23,15 +23,15 @@ void filter_students(char *input_file, char *output_file, const Filter option) {
     students = NULL;
 }
 
-int read_students(const char *input_file, Student *students) {
+int read_students(const char *input_file, Student **students) {
     FILE *file = open_input_file(input_file);
     int student_count = INITIAL_CLASS_SIZE;
     char curr_line[MAX_LINE_SIZE];
 
     // TODO: read students with realloc
     while(fgets(curr_line, MAX_LINE_SIZE, file)) {
-        resize_students_arr(&students, student_count + 1);
-        students[student_count] = get_student_from_line(curr_line);
+        resize_students_arr(students, student_count + 1);
+        *students[student_count] = get_student_from_line(curr_line);
         student_count++;
     }
 
@@ -67,13 +67,47 @@ Student get_student_from_line(char *curr_line) {
                 &student.info.international.toefl);
 
     // TODO: error handling for when scanned data is not right
+    if(scanned_data != MIN_DOMESTIC_INFO &&
+        scanned_data != MIN_INTERNATIONAL_INFO) {
+
+        perror("Error when scanning data for student.\n");
+        return get_blank_student();
+    }
+
     // TODO: error handling for each stat
 
     // TODO: get ymd
     get_ymd(&student, date);
-    student.is_international = is_student_international(student);
+    student.is_international = is_student_international(status);
 
     return student;
+}
+
+// void get_ymd();
+
+Student get_blank_student() {
+    return (Student) {
+        .is_international = STUDENT_ERROR_CODE,
+        .info.international = (InternationalStudent) {
+            .first_name = "\0",
+            .last_name = "\0",
+            .gpa = STUDENT_ERROR_CODE,
+            .toefl = STUDENT_ERROR_CODE,
+        }
+    };
+}
+
+int is_student_international(const char status) {
+    if (status == 'I' || status == 'i') {
+        return 1;
+    }
+
+    if(status == 'D' || status == 'd') {
+        return 0;
+    }
+
+    // If not I/i or D/d, then send error code.
+    return STUDENT_ERROR_CODE;
 }
 
 void merge_sort(Student *students, int length) {

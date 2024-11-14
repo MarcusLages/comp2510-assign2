@@ -13,6 +13,9 @@
 #define EQUAL               0
 #define MIN_STUDENTS_SIZE   1
 #define DATE_STRING_SIZE    12
+#define STUDENT_ERROR_CODE  -1
+#define MIN_DOMESTIC_INFO   5
+#define MIN_INTERNATIONAL_INFO   6
 
 typedef enum Month {
     JAN = 1,
@@ -80,11 +83,12 @@ struct Student {
 
 typedef struct Student Student;
 
-int read_students(const char *input_file, Student *students);
+int read_students(const char *input_file, Student **students);
 void resize_students_arr(Student **students, int new_size);
 Student get_student_from_line(char *curr_line);
 void get_ymd(Student *student, char date[DATE_STRING_SIZE]);
-int is_student_international(const Student student);
+Student get_blank_student();
+int is_student_international(const char status);
 void merge_sort(Student *students, int length);
 void merge_sort_recursion(Student *students, int left, int right);
 void merge(Student *students, int left, int mid, int right);
