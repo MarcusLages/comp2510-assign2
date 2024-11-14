@@ -83,7 +83,29 @@ Student get_student_from_line(char *curr_line) {
     return student;
 }
 
-// void get_ymd();
+void get_ymd(Student *student, char date[DATE_STRING_SIZE]) {
+    // TODO:  strtok with - delimiter
+    // use strtol with error handling
+}
+
+void write_to_file(const char *output_file, const Student students[], int count, Filter option) {
+    FILE *file = open_output_file(output_file);
+
+    for(int i = 0; i < count; i++) {
+
+        // If a student is part of a filter, prints them into the output file
+        // if(is_student_in_filter(avg, option)) {
+        //     fprintf(file, "%s %s %s %d %d %.2f\n",
+        //         students[i].last_name, students[i].first_name,
+        //         students[i].student_number,
+        //         students[i].midterm_grade, students[i].final_grade, avg);
+        // }
+    }
+
+    fclose(file);
+    printf("Data successfully written to %s\n", output_file);
+}
+
 
 Student get_blank_student() {
     return (Student) {

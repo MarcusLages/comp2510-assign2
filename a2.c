@@ -10,8 +10,8 @@ int main(const int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-    const char *inputFile = argv[ARG_INPUT_FILE];
-    const char *outputFile = argv[ARG_OUTPUT_FILE];
+    char *inputFile = argv[ARG_INPUT_FILE];
+    char *outputFile = argv[ARG_OUTPUT_FILE];
     const int option = get_filter_option(argv[ARG_OPTION]);
 
     // Logic of the assignment
