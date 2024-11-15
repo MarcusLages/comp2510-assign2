@@ -7,6 +7,9 @@
 
 #define MIN_ARGS            4
 
+/**
+ * Enum for accessing arguments from the command line.
+ */
 enum Args {
     ARG_PROGRAM_NAME,
     ARG_INPUT_FILE,
